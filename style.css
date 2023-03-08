@@ -1,0 +1,632 @@
+* {
+  /* Remove default margin on everything */
+  margin: 0;
+  /* Remove default padding on everything */
+  padding: 0;
+  /* Calc `em` based line height, bigger line height for smaller font size and smaller line height for bigger font size: https://kittygiraudel.com/2020/05/18/using-calc-to-figure-out-optimal-line-height/ */
+  line-height: calc(0.25rem + 1em + 0.25rem);
+}
+
+/* Use a more-intuitive box-sizing model on everything */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/* Remove border and set sensible defaults for backgrounds, on all elements except fieldset progress and meter */
+*:where(:not(fieldset, progress, meter)) {
+  border-width: 0;
+  border-style: solid;
+  background-origin: border-box;
+  background-repeat: no-repeat;
+}
+
+html {
+  /* Allow percentage-based heights in the application */
+  block-size: 100%;
+  /* Making sure text size is only controlled by font-size */
+  -webkit-text-size-adjust: none;
+}
+
+/* Smooth scrolling for users that don't prefer reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Allow percentage-based heights in the application */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  /* Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+  /* https://marco.org/2012/11/15/text-rendering-optimize-legibility */
+  text-rendering: optimizeSpeed;
+}
+
+/* Improve media defaults */
+:where(img, svg, video, canvas, audio, iframe, embed, object) {
+  display: block;
+}
+:where(img, svg, video) {
+  block-size: auto;
+  max-inline-size: 100%;
+}
+
+/* Remove stroke and set fill colour to the inherited font colour */
+:where(svg) {
+  stroke: none;
+  fill: currentColor;
+}
+
+/* SVG's without a fill attribute */
+:where(svg):where(:not([fill])) {
+  /* Remove fill and set stroke colour to the inherited font colour */
+  stroke: currentColor;
+  fill: none;
+  /* Rounded stroke */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Set a size for SVG's without a width attribute */
+:where(svg):where(:not([width])) {
+  inline-size: 5rem;
+}
+
+/* Remove built-in form typography styles */
+:where(input, button, textarea, select),
+:where(input[type="file"])::-webkit-file-upload-button {
+  color: inherit;
+  font: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+}
+
+/* Change textarea resize to vertical only and block only if the browser supports that */
+:where(textarea) {
+  resize: vertical;
+}
+@supports (resize: block) {
+  :where(textarea) {
+    resize: block;
+  }
+}
+
+/* Avoid text overflows */
+:where(p, h1, h2, h3, h4, h5, h6) {
+  overflow-wrap: break-word;
+}
+
+/* Fix h1 font size inside article, aside, nav, and section */
+h1 {
+  font-size: 2em;
+}
+
+/* Position list marker inside */
+:where(ul, ol) {
+  list-style-position: inside;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+:where(ul, ol)[role="list"] {
+  list-style: none;
+}
+
+/* More readable underline style for anchor tags without a class. This could be set on anchor tags globally, but it can cause conflicts. */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make it clear that interactive elements are interactive */
+:where(
+    a[href],
+    area,
+    button,
+    input,
+    label[for],
+    select,
+    summary,
+    textarea,
+    [tabindex]:not([tabindex*="-"])
+  ) {
+  cursor: pointer;
+  touch-action: manipulation;
+}
+:where(input[type="file"]) {
+  cursor: auto;
+}
+:where(input[type="file"])::-webkit-file-upload-button,
+:where(input[type="file"])::file-selector-button {
+  cursor: pointer;
+}
+
+/* Make sure users can't select button text */
+:where(
+    button,
+    button[type],
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"]
+  ),
+:where(input[type="file"])::-webkit-file-upload-button,
+:where(input[type="file"])::file-selector-button {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  text-align: center;
+}
+
+/* Disabled cursor for disabled buttons */
+:where(
+    button,
+    button[type],
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"]
+  )[disabled] {
+  cursor: not-allowed;
+}
+
+/* ==== My CSS === */
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+button {
+  font-family: "Poppins", sans-serif;
+}
+
+/* Header Layout */
+
+header {
+  background-image: url(images/bg-hero-mobile.svg);
+  background-color: hsl(192, 100%, 96%);
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  padding: 5% 10%;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  width: 110%;
+}
+
+.header-website-logo {
+  width: 30%;
+  align-self: center;
+}
+
+nav button {
+  background-color: white;
+  padding: 0.5% 8%;
+  border-radius: 50px;
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+  color: hsl(192, 100%, 9%);
+  font-size: 0.75rem;
+  transition: 0.2s;
+  transition-timing-function: linear;
+}
+
+nav button:hover {
+  color: hsla(192, 100%, 9%, 0.6);
+  transform: scale(0.95);
+}
+
+.header-flex-container-1 {
+  display: grid;
+  gap: 2.5vh;
+}
+
+.header-flex-container-2 {
+  margin-top: 15%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5vh;
+}
+
+.header-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  color: hsl(192, 100%, 9%);
+}
+
+.header-content {
+  color: hsl(192, 100%, 9%);
+}
+
+.get-started {
+  padding: 2.5% 14vw;
+  margin: auto;
+  color: hsl(193, 100%, 96%);
+  background-color: hsl(322, 100%, 66%);
+  border-radius: 50px;
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.4);
+  font-size: 0.75rem;
+  transition: 0.2s;
+  transition-timing-function: linear;
+}
+
+.get-started:hover {
+  background-color: hsla(322, 100%, 66%, 0.65);
+  transform: scale(0.97);
+}
+
+@media (min-width: 420px) {
+  header {
+    background-image: url(images/bg-hero-desktop.svg);
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    padding: 4% 5%;
+  }
+
+  nav {
+    width: 100%;
+    height: 7%;
+  }
+
+  .header-website-logo {
+    width: 16%;
+  }
+
+  nav button {
+    padding: 0.5% 5%;
+    font-size: 0.875rem;
+  }
+
+  .header-flex-container-1 {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+  }
+
+  .header-flex-container-1 > img {
+    width: 53%;
+  }
+
+  .header-flex-container-2 {
+    margin: auto 0;
+    width: 40%;
+    text-align: left;
+    gap: 4.5vh;
+  }
+
+  .header-title {
+    font-size: 2.675rem;
+    line-height: 1.5em;
+  }
+
+  .header-content {
+    font-size: 1.125rem;
+    line-height: 1.5em;
+  }
+
+  .get-started {
+    margin-left: 0;
+    padding: 2.5% 5vw;
+    font-size: 0.875rem;
+  }
+}
+
+/* Main Layout */
+
+.card {
+  height: 75vh;
+  margin: 10% 5%;
+  padding: 10%;
+  border-radius: 15px;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.card img {
+  order: -1;
+  margin-bottom: 7vh;
+}
+
+.card h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.25rem;
+  color: hsl(192, 100%, 9%);
+}
+
+.card p {
+  color: hsl(208, 11%, 55%);
+  font-size: 1rem;
+}
+
+.card:first-child {
+  margin-top: 15%;
+}
+
+.card:last-child {
+  position: relative;
+  bottom: -15vh;
+  height: min(25vh, 180px);
+  background-color: white;
+  padding: 10% 0;
+  display: grid;
+  gap: 0%;
+}
+
+.card:last-child h2 {
+  font-size: 1.1rem;
+}
+
+.card:last-child button {
+  font-size: 0.675rem;
+  padding: 2.5% 12vw;
+}
+
+@media (min-width: 420px) {
+  .card {
+    height: 65vh;
+    margin: 2.5% 5%;
+    padding: 4% 3% 4% 7.5%;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .card div {
+    margin: auto 0;
+    width: 45%;
+    display: grid;
+    gap: 1em;
+  }
+
+  .card img {
+    margin-bottom: 0;
+  }
+
+  .card:nth-child(2n + 1) img {
+    order: 1;
+  }
+
+  .card h2 {
+    font-size: 1.75rem;
+  }
+
+  .card p {
+    font-size: 1.125rem;
+  }
+
+  .card:first-child {
+    margin-top: 7.5%;
+  }
+
+  .card:last-child {
+    width: 45%;
+    margin: 0 auto;
+    padding: 7% 0;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    gap: 1.75em;
+  }
+
+  .card:last-child h2 {
+    font-size: 1.65rem;
+  }
+
+  .card:last-child button {
+    font-size: 0.875rem;
+    padding: 2.5% 7vw;
+    margin: auto;
+  }
+}
+
+/* Footer layout */
+
+footer {
+  background-color: hsl(192, 100%, 9%);
+  padding: 30% 5% 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+  color: hsl(192, 100%, 96%);
+}
+
+.footer-website-logo {
+  width: 45%;
+}
+
+.footer-flex-container {
+  display: flex;
+  gap: 6%;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.icon-position {
+  align-self: flex-start;
+  margin-top: 2%;
+  margin-right: 1.5%;
+}
+
+.footer-links {
+  text-decoration: none;
+  color: hsl(192, 100%, 96%);
+  width: fit-content;
+  margin: -2.5%;
+}
+
+.footer-links:first-of-type {
+  margin-top: 2vh;
+}
+
+.footer-links:last-of-type {
+  margin-bottom: 2vh;
+}
+
+.social-media-container {
+  display: flex;
+  justify-content: center;
+  gap: 3%;
+}
+
+.social-media-container > div {
+  border: 2px solid;
+  border-radius: 50%;
+  padding: 2%;
+  transition: 0.3s;
+}
+
+.social-media-container > div:hover {
+  cursor: pointer;
+  color: hsl(322, 100%, 66%);
+}
+
+.social-media-container svg {
+  height: 2.5vh;
+  width: 2.5vh;
+  fill: hsl(192, 100%, 96%);
+  transition: 0.3s;
+}
+
+.social-media-container > div:hover svg {
+  fill: hsl(322, 100%, 66%);
+}
+
+.footer-note {
+  text-align: center;
+  font-size: 0.675rem;
+}
+
+/* link hover animation */
+.link-hover-animation {
+  position: relative;
+}
+
+.link-hover-animation::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1.5px;
+  bottom: 0;
+  left: 0;
+  background-color: hsl(192, 100%, 96%);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s ease-out;
+}
+
+.link-hover-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+@media (min-width: 420px) {
+  footer {
+    font-size: 1rem;
+    padding: 10% 10% 7%;
+    display: grid;
+    align-items: start;
+    /* justify-items: start; */
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas: 
+                        "logo     .        .          ."
+                        "location aboutUs  career     socialMedia"
+                        "location whatWeDo blog       ."
+                        "phone    faq      contact    ."
+                        "email    .        .          copyright";
+    gap: 5%;  
+  }
+
+  .footer-website-logo {
+    grid-area: logo;
+    margin-bottom: 1.5em;
+  }
+
+  .location-footer {
+    grid-area: location;
+  }
+  .phone-footer {
+    grid-area: phone;
+  }
+  .email-footer {
+    grid-area: email;
+  }
+
+  .social-media-container div:nth-child(1) {
+    grid-area: location;
+  }
+  .social-media-container div:nth-child(2) {
+    grid-area: phone;
+  }
+  .social-media-container div:nth-child(3) {
+    grid-area: email;
+  }
+
+  .footer-links{
+    margin-right: auto;
+  }
+
+  .footer-links:nth-of-type(1){
+    grid-area: aboutUs;
+  }
+  .footer-links:nth-of-type(2){
+    grid-area: whatWeDo;
+  }
+  .footer-links:nth-of-type(3){
+    grid-area: faq;
+  }
+  .footer-links:nth-of-type(4){
+    grid-area: career;
+  }
+  .footer-links:nth-of-type(5){
+    grid-area: blog;
+  }
+  .footer-links:nth-of-type(6){
+    grid-area: contact;
+  }
+
+  .social-media-container {
+    grid-area: socialMedia;
+  }  
+
+  .footer-note {
+    grid-area: copyright;
+  }
+
+  .footer-links:first-of-type {
+    margin-top: -2%; 
+  }
+  
+  .footer-links:last-of-type {
+    margin-bottom: -2.5%;
+  }
+
+  .social-media-container {
+    justify-content: left;
+    transform: translateY(-50%);
+  }
+
+  .social-media-container svg {
+    height: 2vh;
+    width: 2vh;
+  }
+
+  .footer-note {
+    transform: translateY(175%);
+  }
+}
